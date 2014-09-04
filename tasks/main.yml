@@ -1,0 +1,54 @@
+---
+# tasks file for backup-target
+- name: install rsync
+  apt:
+    pkg: rsync
+    state: latest
+
+- name: generate keypair
+  user:
+    name: replicator
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+
+- name: fetch public key
+  fetch:
+    dest: "{{ ssh_control_location }}"
+    flat: yes
+    src: /home/replicator/.ssh/id_rsa.pub
+
+- name: disable SSH host key checking
+  lineinfile:
+    dest: /home/replicator/.ssh/config
+    line: "StrictHostKeyChecking no"
+    create: yes
+    state: present
+    owner: replicator
+
+- name: setup data disk
+  filesystem:
+    fstype: ext4
+    device: "{{ block_device }}"
+  when: block_device is defined
+
+- name: create the data mountpoint
+  file:
+    path: /data
+    state: directory
+    owner: replicator
+
+- name: mount data disk
+  mount:
+    name: /data
+    src: "{{ block_device }}"
+    state: mounted
+    fstype: ext4
+  when: block_device is defined
+
+- name: create the target data directories
+  file:
+    path: "/data/{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner }}"
+  with_items:
+    - "{{ target_data_directories }}"

@@ -1,0 +1,7 @@
+---
+# defaults file for backup-target
+target_data_directories:
+  - { path: database, owner: replicator }
+  - { path: filesystem, owner: replicator }
+  - { path: database_snapshots, owner: replicator }
+  - { path: filesystem_snapshots, owner: replicator }
