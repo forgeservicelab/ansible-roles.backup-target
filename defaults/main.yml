@@ -5,3 +5,4 @@ target_data_directories:
   - { path: filesystem, owner: replicator }
   - { path: database_snapshots, owner: replicator }
   - { path: filesystem_snapshots, owner: replicator }
+  - { path: performance, owner: replicator }
