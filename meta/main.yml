@@ -1,0 +1,12 @@
+---
+galaxy_info:
+  author: Jorge Rodriguez
+  description: Client side operations of backup framework
+  company: Digile
+  license: GPLv3
+  min_ansible_version: 1.8
+  platforms:
+  - name: Debian
+    versions:
+    - all
+dependencies: []
