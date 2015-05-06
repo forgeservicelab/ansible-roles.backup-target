@@ -11,6 +11,13 @@
     generate_ssh_key: yes
     ssh_key_bits: 2048
 
+- name: Add replicator to mysql group
+  user:
+    name: replicator
+    append: yes
+    groups: mysql
+  ignore_errors: yes
+
 - name: fetch public key
   fetch:
     dest: "{{ ssh_control_location }}"
