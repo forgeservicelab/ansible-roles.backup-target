@@ -2,8 +2,8 @@
 galaxy_info:
   author: Jorge Rodriguez
   description: Client side operations of backup framework
-  company: Digile
-  license: GPLv3
+  company: DIGILE Ltd.
+  license: MIT
   min_ansible_version: 1.8
   platforms:
   - name: Debian
